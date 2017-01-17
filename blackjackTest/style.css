@@ -1,0 +1,60 @@
+
+.mountcard_d {
+
+   height: 120px;
+   width: 70px;
+   border: 3px solid black;
+   text-transform: uppercase;
+}
+
+#D_first {
+   position: absolute;
+
+   top:30px;
+   right:420px;
+   background-color: white;
+}
+
+#D_second_hidden {
+   position: absolute;
+
+   top:30px;
+   left: 420px;
+   background-color: red;
+}
+
+.mountcard_p {
+
+   height: 120px;
+   width: 70px;
+   border: 3px solid black;
+   text-transform: uppercase;
+
+
+}
+#P_first {
+   position: absolute;
+
+   top: 400px;
+   left:400px;
+   background-color: white;
+}
+
+#P_second {
+   position: absolute;
+
+   top: 400px;
+   right: 440px;
+   background-color: red;
+}
+
+
+#playingfield {
+   position: fixed;
+   background: url("table.png");
+   /*background-size: 1000px;*/
+   height: 1000px;
+   width: 1000px;
+   background-repeat: no-repeat;
+
+}
