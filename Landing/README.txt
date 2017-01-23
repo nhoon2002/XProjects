@@ -1,1 +1,0 @@
-This is a landing page designed to be shortcutted on your browser so you can add sites you want to get to with a single click.
