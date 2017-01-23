@@ -1,20 +1,126 @@
+var inquirer = require('inquirer');
+/////////////////////////////////
+
+var userBank = 100;
+var userBet;
+
+
+
 var deck = new Stack();
-var hand = new Stack();
-var i;
+var userHand = new Stack();
+var dealerHand = new Stack();
+var burnPile = new Stack();
 
-deck.makeDeck(1);
-// deck.deal();
-deck.shuffle(1);
-console.log(deck.deal());
-console.log(deck.deal().toString());
 
+deck.makeDeck(1); //creates 1 deck
+deck.shuffle(1); //shuffles that deck 1 time
 
 
 
-function Card(rank, suit) {
+/////////////////////////////////////
+
+if (deck.cards.length > 10) {
+  playDeck();
+} else {
+  console.log("Shuffling the deck...");
+  deck.shuffle(1);
+  playDeck();
+}
+
+function dealHands() {
+  burnPile.addCard(deck.deal());
+  console.log("Burned: " + burnPile.cards.toString());
+
+  userHand.addCard(deck.deal()); //deals top card, then adds the dealt card to user's hand
+  dealerHand.addCard(deck.deal());
+  userHand.addCard(deck.deal());
+  dealerHand.addCard(deck.deal());
+  console.log("User: " + userHand.compute() + "--" + userHand.cards[0].toString() + ' & ' + userHand.cards[1].toString());
+  console.log("Dealer: " + dealerHand.compute() + "--" + dealerHand.cards[0].toString() + ' & ' + dealerHand.cards[1].toString());
+  console.log(deck.cards.length + ' cards remaining in the deck.'); //Shows how many cards are in the deck.
+}
+
+function dealerFlip() {
+
+}
+
+function promptHS() {
+  var user = userHand.compute();
+  var dealer = dealerHand.compute();
+  var options;
+
+  if ( (userHand.cards.length === 2) && (user < 21) && (userHand.cards[0].value !== userHand.cards[1].value) ) {
+
+    options = ["Hit", "Stay", "Double", "Surrender"];
+
+  } else if ( (userHand.cards.length === 2) && (userHand.cards[0].value === userHand.cards[1].value) ) {
+
+    options = ["Hit", "Stay", "Double", "Split", "Surrender"];
+  } else if ( (userHand.cards.length > 2) && (user < 21) ) {
+    options = ["Hit", "Stay"];
+  }
+
+    inquirer.prompt([
+      {
+        type: "list",
+        name: "userMove",
+        message: "Make your move.",
+        choices: options
+      }
+    ]).then(function(prompt) {
+      switch (prompt.userMove) {
+        case "Hit":
+        userHand.addCard(deck.deal());
+        promptHS();
+          break;
+        case "Double":
+        userHand.addCard(deck.deal());
+          break;
+        default:
+          break;
+
+
+      }
+    }).then(dealerFlip);
+
+
+
+}
+
+function playDeck(){
+  dealHands();
+  promptHS();
+
+
+  //shuffle
+
+  //burn
+  //deal cycle
+  //examine dealer hand and user hand
+    //if user has blackjack, user win BREAK
+    //else...
+
+  //prompt user hit or stay
+    //if hit, deal 1 more card
+      //if user hand <=21
+        //prompt hit or stay
+      //else if user hand > 21
+        //user loses BREAK
+    //if stay, show dealer card
+      //if (dealer hand) > (user hand),
+        // user loses
+      //else
+        // user wins
+
+
+}
+
+//////////////////////////////////////
+function Card(rank, suit, value) {
 
   this.rank = rank;
   this.suit = suit;
+  this.value = value;
 
   this.toString   = cardToString;
 
@@ -22,7 +128,7 @@ function Card(rank, suit) {
 
 function cardToString() {
 
-  var rank, suit;
+  var rank, suit, value;
 
   switch (this.rank) {
     case "A" :
@@ -108,6 +214,7 @@ function Stack() {
   this.addCard   = stackAddCard;
   this.combine   = stackCombine;
   this.cardCount = stackCardCount;
+  this.compute = stackCompute;
 }
 
 function stackMakeDeck(n) {
@@ -115,6 +222,8 @@ function stackMakeDeck(n) {
   var ranks = new Array("A", "2", "3", "4", "5", "6", "7", "8", "9",
                         "10", "J", "Q", "K");
   var suits = new Array("C", "D", "H", "S");
+  var values = new Array(1, 2, 3, 4, 5, 6, 7, 8, 9,
+                          10, 10, 10, 10);
   var i, j, k;
   var m;
 
@@ -130,7 +239,7 @@ function stackMakeDeck(n) {
     for (j = 0; j < suits.length; j++)
       for (k = 0; k < ranks.length; k++)
         this.cards[i * m + j * ranks.length + k] =
-          new Card(ranks[k], suits[j]);
+          new Card(ranks[k], suits[j], values[k]);
 }
 
 // Shuffling a Stack
@@ -159,6 +268,14 @@ function stackDeal() {
     return this.cards.shift();
   else
     return null;
+}
+
+function stackCompute() {
+  var total = 0;
+  for (var i = 0; i < this.cards.length; i++) {
+    total += this.cards[i].value;
+  }
+  return total;
 }
 
 function stackDraw(n) {
