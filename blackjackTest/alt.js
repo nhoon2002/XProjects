@@ -16,6 +16,7 @@ deck.makeDeck(1); //creates 1 deck
 deck.shuffle(1); //shuffles that deck 1 time
 
 
+var promptEnd = false;
 
 /////////////////////////////////////
 
@@ -27,6 +28,12 @@ if (deck.cards.length > 10) {
   playDeck();
 }
 
+promptHS();
+
+
+
+
+
 function dealHands() {
   burnPile.addCard(deck.deal());
   console.log("Burned: " + burnPile.cards.toString());
@@ -36,12 +43,12 @@ function dealHands() {
   userHand.addCard(deck.deal());
   dealerHand.addCard(deck.deal());
   console.log("User: " + userHand.compute() + "--" + userHand.cards[0].toString() + ' & ' + userHand.cards[1].toString());
-  console.log("Dealer: " + dealerHand.compute() + "--" + dealerHand.cards[0].toString() + ' & ' + dealerHand.cards[1].toString());
+  console.log("Dealer shows a " + dealerHand.cards[0].value +" -- " + dealerHand.cards[0].toString() + ' & FACEDOWN');
   console.log(deck.cards.length + ' cards remaining in the deck.'); //Shows how many cards are in the deck.
 }
 
 function dealerFlip() {
-
+   console.log("Dealer Flips!");
 }
 
 function promptHS() {
@@ -58,38 +65,60 @@ function promptHS() {
     options = ["Hit", "Stay", "Double", "Split", "Surrender"];
   } else if ( (userHand.cards.length > 2) && (user < 21) ) {
     options = ["Hit", "Stay"];
-  }
+} else if (user >= 21) {
+   console.log("You have " + user);
+   promptEnd = true;
+   return;
+}
 
     inquirer.prompt([
       {
         type: "list",
         name: "userMove",
-        message: "Make your move.",
+        message: "You have " + userHand.compute() + ". Make your move.",
         choices: options
       }
     ]).then(function(prompt) {
       switch (prompt.userMove) {
         case "Hit":
         userHand.addCard(deck.deal());
-        promptHS();
+      //   console.log("You have " + userHand.compute());
           break;
         case "Double":
         userHand.addCard(deck.deal());
+      //   console.log("You have " + userHand.compute());
+        promptEnd = true;
+          break;
+         case "Stay":
+         promptEnd = true;
           break;
         default:
           break;
 
 
       }
-    }).then(dealerFlip);
+      computeScore();
+   });
+
+
 
 
 
 }
 
+function computeScore() {
+   // console.log("running..");
+   if (promptEnd === false) {
+      promptHS();
+   } else if (promptEnd === true){
+      dealerFlip();
+   }
+}
+
 function playDeck(){
+   promptEnd = false;
   dealHands();
-  promptHS();
+  // promptHS();
 
 
   //shuffle
