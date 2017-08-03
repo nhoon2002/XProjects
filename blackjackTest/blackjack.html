@@ -3,26 +3,62 @@
    <head>
       <meta charset="utf-8">
       <link rel="stylesheet" type="text/css" href="style.css" >
+      <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <title></title>
    </head>
    <body>
+     <!-- <div class="container"> -->
 
-      <h1 id="welcome">Welcome to a trial run of Blackjack: Rough Draft</h1>
+      <div class='header1'>Welcome to BlackJack</div>
+      <div class="playingfield">
 
-      <div id="playingfield">
-         <div id="D_first" class="mountcard_d"></div>
-         <div id="D_second_hidden" class="mountcard_d"></div>
-         <div id="separator"></div>
-         <div id="P_first" class="mountcard_p"></div>
-         <div id="P_second" class="mountcard_p"></div>
+        <div class="playerbar_left">
+          <div id='P1'  class='otherplayersSection'>
+            <img class='img-circle p1circle' src='https://placehold.it/80x80' alt='p1'/>
+            <br/>
+            <span>Player 1</span>
+          </div>
+          <div id='P3' class='otherplayersSection'>
+            <img class='img-circle p3circle' src='https://placehold.it/80x80' alt='p3'/>
+            <br/>
+            <span>Player 3</span>
+          </div>
+        </div>
+        <div class="playerbar_right">
+          <div id='P2' class='otherplayersSection'>
+            <img class='img-circle p2circle' src='https://placehold.it/80x80' alt='p2'/>
+            <br/>
+            <span>Player 2</span>
+          </div>
+          <div id='P4' class='otherplayersSection'>
+            <img class='img-circle p4circle' src='https://placehold.it/80x80' alt='p4'/>
+            <br/>
+            <span>Player 4</span>
+          </div>
+        </div>
+
+        <div class='commandDisplay'>
+          <button type='button' class='btn btn-primary command'>Hit</button>
+          <button type='button' class='btn btn-warning command'>Stay</button>
+          <br/>
+          <button type='button' class='btn btn-danger command'>Double</button>
+          <button type='button' class='btn btn-success command'>Split</button>
+        </div>
+
+
+
+
+
+
+
+
+
+
       </div>
-
-      <div id="CardsDealtSoFar"></div>
-      <div id="Wins_Losses"></div>
-
-
+  <!-- </div> -->
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
    <script type="text/javascript" src="blackjack_logic.js"></script>
+
 
    </body>
 </html>

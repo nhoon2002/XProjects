@@ -1,60 +1,92 @@
-
-.mountcard_d {
-
-   height: 120px;
-   width: 70px;
-   border: 3px solid black;
-   text-transform: uppercase;
-}
-
-#D_first {
-   position: absolute;
-
-   top:30px;
-   right:420px;
-   background-color: white;
-}
-
-#D_second_hidden {
-   position: absolute;
-
-   top:30px;
-   left: 420px;
-   background-color: red;
-}
-
-.mountcard_p {
-
-   height: 120px;
-   width: 70px;
-   border: 3px solid black;
-   text-transform: uppercase;
-
+body {
+  width: 100vw;
+  height: 100vh;
 
 }
-#P_first {
-   position: absolute;
-
-   top: 400px;
-   left:400px;
-   background-color: white;
+.playingfield {
+  text-align: center;
+}
+.header1 {
+  width: 100%;
+  height: 50px;
+  background-color: blue;
 }
 
-#P_second {
-   position: absolute;
-
-   top: 400px;
-   right: 440px;
-   background-color: red;
+.playingfield {
+  margin: 0;
+  text-align: center;
+  background-color: green;
+  /*background-image: url("table.png");*/
+  width: 100vw;
+  height: 100vh;
 }
 
+.playerbar_left {
+  background-color: grey;
+  float: left;
+  width: 20%;
+  height: 100%;
+  margin: 10px 0 10px 0;
 
-#playingfield {
-   position: fixed;
-   background: url("table.png");
-   /*background-size: 1000px;*/
-   height: 1000px;
-   width: 1000px;
-   background-repeat: no-repeat;
 
+  /*opacity: 0.3;*/
+
+}
+
+.playerbar_right {
+  background-color: grey;
+  float: right;
+  width: 20%;
+  height: 100%;
+  margin: 10px 0 10px 0;
+}
+otherplayersSection {
+  margin: 10px;
+}
+#P1 {
+  background-color: pink;
+  height: 50%;
+
+}
+#P2 {
+  background-color: orange;
+  height: 50%;
+}
+#P3 {
+  width: 20%;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  background-color: yellow;
+  height: 50%;
+}
+#P4 {
+  width: 20%;
+  text-align: center;
+  position: absolute;
+  /*right: 0;*/
+  bottom: 0;
+  background-color: teal;
+  height: 50%;
+}
+.p3circle {
+
+}
+
+.commandDisplay {
+  margin-bottom: 10px;
+  width: 80%;
+  height: 20%;
+  /*background-color: black;*/
+  position: absolute;
+  /*float: left;*/
+  /*clear: left;*/
+  bottom: 0;
+  left: 10%;
+  right: 10%;
+}
+button.command {
+  margin: 10px;
+  width: 20%;
+  height: 30%;
 }
